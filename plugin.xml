@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="com.bobbytech.blinkup"
+        version="0.6.0">
+
+  <name>BlinkUp</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <asset src="www/blinkup.js" target="js/blinkup.js"/>
+
+  <js-module src="www/blinkup.js" name="blinkup">
+    <clobbers target="blinkup" />
+  </js-module>
+
+  <platform name="ios">
+    <info>
+Open xcode by 
+
+    $ open platforms/ios/<Project Name>.xcodeproj
+    
+go into settings change `deployment target` to 7.0 or above and add `<Project Name>/Plugins/com.bobbytech.blinkup/Bridging-Header.h` to Objective-c Bridging Header under the Swift Compiler - Code Generation options
+
+Add the following `LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";`
+
+Finally add the Electric Imp BlinkUpTM SDK framework and dependent frameworks
+    </info>
+    <config-file target="config.xml" parent="/*">
+      <feature name="BlinkUp">
+        <param name="ios-package" value="HWPBlinkUp"/>
+      </feature>
+    </config-file>
+
+    <header-file src="src/ios/Bridging-Header.h" />
+    <source-file src="src/ios/BlinkUp.swift"/>
+  </platform>
+
+</plugin>
