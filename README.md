@@ -31,3 +31,8 @@ fail = function (error) {
 blinkup.start(success, fail);
 
 ```
+
+License
+=======
+
+MIT
