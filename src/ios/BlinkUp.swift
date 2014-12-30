@@ -13,6 +13,7 @@ import Foundation
     var mCommand: CDVInvokedUrlCommand?
     let myBlinkUpController = BlinkUpController()
     let apiKey = "YOUR API KEY"
+    var pluginResult: CDVPluginResult?
     
     func blinkup(command: CDVInvokedUrlCommand) {
         mCommand = command
@@ -22,7 +23,7 @@ import Foundation
         
         if error != nil
         {
-            var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: error.description)
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: error.description)
             commandDelegate.sendPluginResult(pluginResult, callbackId:mCommand?.callbackId)
         }
     }
@@ -31,20 +32,19 @@ import Foundation
         
         if error != nil
         {
-            var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: error.description)
-            commandDelegate.sendPluginResult(pluginResult, callbackId:mCommand?.callbackId)
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: error.description)
         }
         
         if let url = agentURL?.absoluteString
         {
-            var pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: url)
-            commandDelegate.sendPluginResult(pluginResult, callbackId:mCommand?.callbackId)
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: url)
         }
         else
         {
-            var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: "No AgentUrl returned")
-            commandDelegate.sendPluginResult(pluginResult, callbackId:mCommand?.callbackId)
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: "No AgentUrl returned")
         }
+        
+        commandDelegate.sendPluginResult(pluginResult, callbackId:mCommand?.callbackId)
         
     }
     
@@ -63,7 +63,7 @@ import Foundation
     
     func blinkUpWillExitFromCancel(blinkUpController: BlinkUpController!)
     {
-        var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: "BlinkUp Cancelled")
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAsString: "BlinkUp Cancelled")
         commandDelegate.sendPluginResult(pluginResult, callbackId:mCommand?.callbackId)
     }
 }
