@@ -30,7 +30,11 @@ fail = function (error) {
     alert("ERROR " + error);
 };
 
-blinkup.start(success, fail);
+/* Initial BlinkUp */
+blinkup.start(‘’,success, fail);
+
+/* Change WiFi serring */
+blinkup.start(planId,success, fail);
 
 ```
 
