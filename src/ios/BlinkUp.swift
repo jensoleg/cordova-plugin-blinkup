@@ -12,12 +12,18 @@ import Foundation
     
     var mCommand: CDVInvokedUrlCommand?
     let myBlinkUpController = BlinkUpController()
-    let apiKey = "YOUR API KEY"
+    let apiKey = "YOUR-API-KEY"
     var pluginResult: CDVPluginResult?
     
     func blinkup(command: CDVInvokedUrlCommand) {
         mCommand = command
         myBlinkUpController.agentUrlTimeout = 20.0
+        var planId = command.arguments[0] as String
+        
+        if !planId.isEmpty
+        {
+            myBlinkUpController.planId = planId
+        }
         
         var error: NSError! = myBlinkUpController.presentWifiSettingsWithDelegate(self, APIKey:apiKey, animated:true)
         
@@ -37,7 +43,7 @@ import Foundation
         
         if let url = agentURL?.absoluteString
         {
-            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: url)
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: "\(url)/\(blinkUpController.planId)")
         }
         else
         {
@@ -45,7 +51,6 @@ import Foundation
         }
         
         commandDelegate.sendPluginResult(pluginResult, callbackId:mCommand?.callbackId)
-        
     }
     
     func blinkUp(blinkUpController: BlinkUpController!, flashCompleted flashDidComplete: Bool) {

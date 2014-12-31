@@ -1,11 +1,14 @@
-/*global cordova*/
+cordova.define("com.bobbytech.blinkup.blinkup", function (require, exports, module) { /*global cordova*/
 
-var exec = require("cordova/exec");
+    var exec = require("cordova/exec");
 
-var BlinkUp = function(){};
+    var BlinkUp = function () {
+    };
 
-BlinkUp.prototype.start = function (successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "BlinkUp", "blinkup");
-};
+    BlinkUp.prototype.start = function (message, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "BlinkUp", "blinkup", [message]);
+    };
 
-module.exports = new BlinkUp();
+    module.exports = new BlinkUp();
+
+});
