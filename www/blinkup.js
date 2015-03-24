@@ -1,14 +1,18 @@
-cordova.define("com.bobbytech.blinkup.blinkup", function (require, exports, module) { /*global cordova*/
+function BlinkUp() {
+}
 
-    var exec = require("cordova/exec");
+BlinkUp.prototype.start = function (message, successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, "blinkup", "blinkup", [message]);
+};
 
-    var BlinkUp = function () {
-    };
+BlinkUp.install = function () {
+    if (!window.plugins) {
+        window.plugins = {};
+    }
 
-    BlinkUp.prototype.start = function (message, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "BlinkUp", "blinkup", [message]);
-    };
+    window.plugins.blinkup = new BlinkUp();
+    console.log("blinkup installed")
+    return window.plugins.blinkup;
+};
 
-    module.exports = new BlinkUp();
-
-});
+cordova.addConstructor(BlinkUp.install);
