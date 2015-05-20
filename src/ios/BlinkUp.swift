@@ -34,7 +34,7 @@ import Foundation
         }
     }
     
-    func blinkUp(blinkUpController: BlinkUpController!, statusVerified verifiedDate: NSDate!, agentURL: NSURL!, impeeId: NSString!, error: NSError!) {
+    func blinkUp(blinkUpController: BlinkUpController!, verifiedDate: NSDate!, agentURL: NSURL!, impeeId: NSString!, error: NSError!) {
         
         if error != nil
         {

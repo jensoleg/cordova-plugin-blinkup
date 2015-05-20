@@ -1,4 +1,4 @@
-# Cordova Plugin for the Electric Imp BlinkUp SDK
+# Cordova Plugin for the Electric Imp BlinkUp SDK v18.1.0
 
 # Install
 
